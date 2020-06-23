@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css" >
+</head>
+<body>
+     
+    <script>
+        navigator.serviceWorker.register('./sw.js',{scope:'/'})
+        .then(registration => { console.log(registration)}, err => {
+            console.log(err)
+        })
+        //  Notification 必须在页面中设置权限  Notification.requestPermission().then(permisssion=> console.log(permission))
+                // self.registration.Notification('hello sw')
+    </script>
+    <script>
+        const xhr = new XMLHttpRequest()
+        // xhr.responseType ="json"
+        xhr.onreadystatechange = ()=>{
+            if(xhr.readyState === 4){
+                if(xhr.status >=200 && xhr.status<300)
+                {
+                    console.log(xhr.response)
+                }
+            }
+        }
+        xhr.open('get','./userinfo.json',true)
+        xhr.send(null)
+        
+
+    </script>
+    
+</body>
+</html>
